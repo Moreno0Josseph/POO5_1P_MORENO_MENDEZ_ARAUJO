@@ -1,4 +1,4 @@
-package com.pooespol;
+package PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Usuarios;
 
 public class Usuario {
     private String nombre;
