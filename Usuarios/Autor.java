@@ -6,11 +6,42 @@ public class Autor {
     private String codigoUnico;
     private String apellido;
     private String correo;
+    private String institucion;
+    private String campo_de_investigacion;
+
+
+
+    public Autor(String nombre, String codigoUnico, String apellido, String correo, String institucion,
+            String campo_de_investigacion) {
+        this.nombre = nombre;
+        this.codigoUnico = codigoUnico;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.institucion = institucion;
+        this.campo_de_investigacion = campo_de_investigacion;
+    }
+
+
 
 
     public void someterArticulo(Articulo articulo){
 
     }
+
+
+    public void  almacenar_archivo(String archivo) {
+        // Implementación del método
+    }
+
+    
+
+
+    public Array<Revisor> someter_revision(boolean articulo) {
+        // Implementación del método
+    }
+
+
+
 
 
     //Gettes and Setters
@@ -21,9 +52,7 @@ public class Autor {
     public void setCodigoUnico(String codigoUnico) {
         this.codigoUnico = codigoUnico;
     }
-    private String institucion;
-    private String campo_de_investigacion;
-
+    
     public String getNombre() {
         return nombre;
     }

@@ -1,15 +1,40 @@
 package PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Usuarios;
 import PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Interfaz.Articulo;
 
-public class Editor {
-    private String nombre;
-    private String apellido;
-    private String correo;
+public class Editor extends Usuario{
+    
     private String journal;
+
+
+
+    
+    public Editor(String nombre, String apellido, String correo, String journal) {
+        super(nombre, apellido, correo);
+        this.journal = journal;
+    }
+
+
+
+
+
+
+
+
 
     public void publicarArticulo(Articulo articulo){
 
     }
+
+
+
+    public boolean toma_decision() {  // Si se sube publica o no el articulo
+        return true;
+        // Implementación del método
+    }
+
+
+
+
 
     //Getters and Setters
     public String getNombre() {
