@@ -4,12 +4,14 @@ public class Usuario {
     protected String nombre;
     protected String apellido;
     protected String correo;
+    protected TipoUsuario tipoUsuario;
     
 
-    public Usuario(String nombre, String apellido, String correo){
+    public Usuario(String nombre, String apellido, String correo, TipoUsuario tipoUsuario){
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
+        this.tipoUsuario = tipoUsuario;
     }
 
     //Getter and Setters
@@ -42,7 +44,20 @@ public class Usuario {
         this.correo = correo;
     }
 
-    
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    //método toString
+    @Override
+    public String toString(){
+        return this.apellido + " " + this.nombre + " .Correo: " + this.correo;
+    }
     
 
 }
