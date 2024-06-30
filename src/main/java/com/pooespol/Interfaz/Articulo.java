@@ -1,5 +1,4 @@
-
-package PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Interfaz;
+package com.pooespol.Interfaz;
 import java.util.ArrayList;
 
 public class Articulo {

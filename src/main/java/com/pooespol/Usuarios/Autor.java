@@ -1,5 +1,6 @@
-package PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Usuarios;
-import PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Interfaz.Articulo;
+package com.pooespol.Usuarios;
+import com.pooespol.Interfaz.*;
+import java.util.ArrayList;
 public class Autor {
     private String nombre;
     private String codigoUnico;
@@ -35,8 +36,10 @@ public class Autor {
     
 
 
-    public Array<Revisor> someter_revision(boolean articulo) {
+    public ArrayList<Revisor> someter_revision(boolean articulo) {
+        
         // Implementación del método
+        return null;
     }
 
 

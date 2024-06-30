@@ -1,4 +1,4 @@
-package PROYECTO_COLABORATIVO.POO5_1P_MORENO_MENDEZ_ARAUJO.Usuarios;
+package com.pooespol.Usuarios;
 
 public class Usuario {
     protected String nombre;
@@ -44,7 +44,7 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getTipoUsuario() {
+    public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
