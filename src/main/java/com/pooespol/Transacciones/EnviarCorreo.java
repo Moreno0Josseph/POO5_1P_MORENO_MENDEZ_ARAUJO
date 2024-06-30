@@ -46,10 +46,10 @@ public class EnviarCorreo {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("pgudino@espol.edu.ec, paulmgp2002@hotmail.com")
+                    InternetAddress.parse("hivoraraujo6@gmail.com")
             );
-            message.setSubject("Ayudantía");
-            message.setText("Hola, soy Paul Gudino y estoy enviando este correo desde Java!");
+            message.setSubject("Respuesta");
+            message.setText("Hola Usuario, soy Hivor Araujo y estoy enviando este correo desde Java!");
 
             // Enviar el correo
             Transport.send(message);
