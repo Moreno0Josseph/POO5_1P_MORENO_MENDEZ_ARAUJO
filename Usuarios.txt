@@ -1,0 +1,1 @@
+Joseph,Moreno,jlmoreno@espol.edu.ec,AUTOR|Luis,Ponce,lponce@espol.edu.ec,REVISOR|Pedro,Martínez,pmartinez@espol.edu.ec,EDITOR
