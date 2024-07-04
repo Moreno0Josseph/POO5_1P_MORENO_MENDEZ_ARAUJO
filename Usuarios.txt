@@ -1,1 +1,3 @@
-Joseph,Moreno,jlmoreno@espol.edu.ec,AUTOR|Luis,Ponce,lponce@espol.edu.ec,REVISOR|Pedro,Martínez,pmartinez@espol.edu.ec,EDITOR
+Joseph,Moreno,jlmoreno@espol.edu.ec,AUTOR,jmoreno,password1
+Luis,Ponce,lponce@espol.edu.ec,REVISOR,lponce,password2
+Pedro,Martínez,pmartinez@espol.edu.ec,EDITOR,pmartinez,password3

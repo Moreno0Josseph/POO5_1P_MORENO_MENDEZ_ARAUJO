@@ -1,37 +1,33 @@
 package com.pooespol.Usuarios;
 
-import com.pooespol.Interfaz.Articulo;
-
 public class Revisor extends Usuario {
-    private String especialidad;
-    private int articulosRevisados;
+    private int experiencia;
 
-    public Revisor(String nombre, String apellido, String correo, String especialidad, int articulosRevisados, TipoUsuario tipoUsuario) {
-        super(nombre, apellido, correo, tipoUsuario);
-        this.especialidad = especialidad;
-        this.articulosRevisados = articulosRevisados;
+    public Revisor(String nombre, String apellido, String correo, int experiencia, String user, String contraseña) {
+        super(nombre, apellido, correo, user, contraseña);
+        this.experiencia = experiencia;
     }
 
-    public boolean revisarArticulo(Articulo articulo) {
-        // Implementa la lógica real para revisar el artículo
-        // Por ahora, se devuelve true como ejemplo
-        return true;
+    public int getExperiencia() {
+        return experiencia;
     }
 
-    // Getters y Setters
-    public String getEspecialidad() {
-        return especialidad;
+    @Override
+    public String generarCorreo() {
+        return "Estimado Revisor " + getNombre() + ",\n\nSe le ha asignado un nuevo artículo para revisar.\n\nSaludos,\nEditorial";
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    @Override
+    public void decidirSobreArticulo() {
+        // Implementar la lógica para que el revisor proporcione comentarios y una decisión
+        System.out.println("Proporcionando comentarios y decisión sobre el artículo...");
     }
 
-    public int getArticulosRevisados() {
-        return articulosRevisados;
-    }
-
-    public void setArticulosRevisados(int articulosRevisados) {
-        this.articulosRevisados = articulosRevisados;
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", experiencia=" + experiencia +
+                '}';
     }
 }
+

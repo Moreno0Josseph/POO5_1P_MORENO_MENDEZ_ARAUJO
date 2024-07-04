@@ -1,44 +1,48 @@
 package com.pooespol.Interfaz;
-import java.util.ArrayList;
+import com.pooespol.Usuarios.*;
 
 public class Articulo {
-    private String codigoUnico;
     private String titulo;
     private String resumen;
-    private String contenido;
-    private ArrayList <String> palabrasClaves = new ArrayList<String> ();
-    
-    //Getters and Setters
-    public String getCodigoUnico() {
-        return codigoUnico;
+    private Autor autor;
+
+    public Articulo(String titulo, String resumen, Autor autor) {
+        this.titulo = titulo;
+        this.resumen = resumen;
+        this.autor = autor;
     }
-    public void setCodigoUnico(String codigoUnico) {
-        this.codigoUnico = codigoUnico;
-    }
+
     public String getTitulo() {
         return titulo;
     }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
     public String getResumen() {
         return resumen;
     }
+
     public void setResumen(String resumen) {
         this.resumen = resumen;
     }
-    public String getContenido() {
-        return contenido;
+
+    public Autor getAutor() {
+        return autor;
     }
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
-    public ArrayList<String> getPalabrasClaves() {
-        return palabrasClaves;
+
+    @Override
+    public String toString() {
+        return "Articulo{" +
+                "titulo='" + titulo + '\'' +
+                ", resumen='" + resumen + '\'' +
+                ", autor=" + autor +
+                '}';
     }
-    public void setPalabrasClaves(ArrayList<String> palabrasClaves) {
-        this.palabrasClaves = palabrasClaves;
-    }
-   
-    
 }
+
