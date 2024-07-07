@@ -4,5 +4,5 @@ public enum TipoUsuario {
     AUTOR,
     REVISOR,
     EDITOR,
-    LECTOR
+    
 }

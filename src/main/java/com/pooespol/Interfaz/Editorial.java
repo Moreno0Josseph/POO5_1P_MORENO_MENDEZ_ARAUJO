@@ -1,8 +1,7 @@
 package com.pooespol.Interfaz;
 
+import com.pooespol.Transacciones.EnviarCorreo;
 import com.pooespol.Usuarios.*;
-import com.pooespol.Usuarios.*;
-import com.pooespol.Interfaz.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,20 +20,39 @@ public class Editorial {
         String[] usuariosArray = contenido.split("\\|");
         for (String usuario : usuariosArray) {
             String[] dato = usuario.split(",");
-            String nombre = dato[0];
-            String apellido = dato[1];
-            String correo = dato[2];
-            TipoUsuario tipoUsuario = TipoUsuario.valueOf(dato[3]);
-            String usuarioUser = dato[4];
-            String usuarioContraseña = dato[5];
+            if (dato.length >= 6) {
+                String nombre = dato[0].trim();
+                String apellido = dato[1].trim();
+                String correo = dato[2].trim();
+                TipoUsuario tipoUsuario;
+                try {
+                    tipoUsuario = TipoUsuario.valueOf(dato[5].trim());
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Tipo de usuario inválido: " + dato[5]);
+                    continue;
+                }
+                String usuarioUser = "";
+                String usuarioContraseña = "";
 
-            switch (tipoUsuario) {
-                case EDITOR:
-                    usuarios.add(new Editor(nombre, apellido, correo, usuarioUser, usuarioContraseña));
-                    break;
-                case REVISOR:
-                    usuarios.add(new Revisor(nombre, apellido, correo, 0, usuarioUser, usuarioContraseña));
-                    break;
+                if (dato.length >= 6 && tipoUsuario != TipoUsuario.AUTOR) {
+                    usuarioUser = dato[3].trim();
+                    usuarioContraseña = dato[4].trim();
+                }
+
+                switch (tipoUsuario) {
+                    case EDITOR:
+                        usuarios.add(new Editor(nombre, apellido, correo, usuarioUser, usuarioContraseña));
+                        break;
+                    case REVISOR:
+                        int experiencia = Integer.parseInt(dato[4].trim());
+                        usuarios.add(new Revisor(nombre, apellido, correo, experiencia, usuarioUser, usuarioContraseña));
+                        break;
+                    default:
+                        System.err.println("Tipo de usuario no soportado: " + tipoUsuario);
+                        break;
+                }
+            } else {
+                System.err.println("Datos incompletos para el usuario: " + usuario);
             }
         }
     }
@@ -42,31 +60,31 @@ public class Editorial {
     // Método para validar el usuario
     public Usuario validarUsuario(String user, String contraseña) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getUser().equals(user) && usuario.getContraseña().equals(contraseña)) {
-                return usuario;
+            if (usuario instanceof Editor || usuario instanceof Revisor) {
+                if (usuario.getUser().equals(user) && usuario.getContraseña().equals(contraseña)) {
+                    return usuario;
+                }
             }
         }
-        return null; // Usuario no encontrado
+        return null; // Usuario no encontrado o contraseña incorrecta
     }
 
     // Método para someter un artículo
-    public void someterArticulo(Articulo articulo, Autor autor) {
+    public void someterArticulo(Articulo articulo, Autor autor, Revisor rev1, Revisor rev2) {
         articulo.setAutor(autor);
         articulos.add(articulo);
-        enviarCorreoARevisores(articulo);
+        enviarCorreoARevisores(articulo, rev1, rev2);
         System.out.println("Artículo sometido con éxito por " + autor.getNombre() + " " + autor.getApellido());
     }
 
-    private void enviarCorreoARevisores(Articulo articulo) {
-        int asignados = 0;
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Revisor && asignados < 2) {
-                Revisor revisor = (Revisor) usuario;
-                System.out.println(revisor.generarCorreo());
-                // Enviar correo (simulado)
-                asignados++;
-            }
-        }
+    void enviarCorreoARevisores(Articulo articulo, Revisor rev1, Revisor rev2) {
+        String mensaje = "Se le ha asignado un nuevo artículo para revisar:\n\n" +
+                         "Título: " + articulo.getTitulo() + "\n" +
+                         "Resumen: " + articulo.getResumen() + "\n\n" +
+                         "Saludos,\nEditorial";
+        
+        EnviarCorreo.enviarCorreo(rev1.getCorreo(), "Nuevo artículo para revisar", mensaje);
+        EnviarCorreo.enviarCorreo(rev2.getCorreo(), "Nuevo artículo para revisar", mensaje);
     }
 
     // Obtener todos los artículos
@@ -84,4 +102,6 @@ public class Editorial {
         return usuarios;
     }
 }
+
+
 

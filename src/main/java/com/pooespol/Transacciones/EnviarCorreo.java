@@ -7,20 +7,24 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class EnviarCorreo {
-    public static void main(String[] args) {
-        // Cargar propiedades desde el archivo config.properties
+    private static Properties cargarPropiedades() {
         Properties prop = new Properties();
         try (InputStream input = EnviarCorreo.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {
                 System.err.println("No se pudo encontrar el archivo config.properties");
-                return;
+                return null;
             }
             prop.load(input);
         } catch (IOException ex) {
             System.err.println("Error al cargar el archivo de configuración: " + ex.getMessage());
             ex.printStackTrace();
-            return; // Terminar la ejecución si hay un problema cargando las propiedades
         }
+        return prop;
+    }
+
+    public static void enviarCorreo(String destinatario, String asunto, String contenido) {
+        Properties prop = cargarPropiedades();
+        if (prop == null) return;
 
         // Configuración de las propiedades del servidor de correo
         Properties props = new Properties();
@@ -46,22 +50,23 @@ public class EnviarCorreo {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("hivoraraujo6@gmail.com")
+                    InternetAddress.parse(destinatario)
             );
-            message.setSubject("Respuesta");
-            message.setText("Hola Usuario, soy Hivor Araujo y estoy enviando este correo desde Java!");
+            message.setSubject(asunto);
+            message.setText(contenido);
 
             // Enviar el correo
             Transport.send(message);
 
-            System.out.println("Correo enviado exitosamente!");
+            System.out.println("Correo enviado exitosamente a " + destinatario);
 
         } catch (MessagingException e) {
-            System.err.println("Error al enviar el correo: " + e.getMessage());
+            System.err.println("Error al enviar el correo a " + destinatario + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
+
 
 
 

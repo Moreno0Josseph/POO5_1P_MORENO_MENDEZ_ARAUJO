@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LeerArchivo {
+   
     public static String leerDesdeArchivo(String rutaArchivo) {
         StringBuilder contenido = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
@@ -17,4 +18,5 @@ public class LeerArchivo {
         }
         return contenido.toString();
     }
+   
 }

@@ -37,7 +37,7 @@ public abstract class Usuario {
 
     public abstract String generarCorreo();
 
-    public abstract void decidirSobreArticulo();
+    public abstract int decidirSobreArticulo();
     
     @Override
     public String toString() {
