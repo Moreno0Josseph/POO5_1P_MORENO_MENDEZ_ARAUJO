@@ -13,49 +13,7 @@ public class Editorial {
         usuarios = new ArrayList<>();
         articulos = new ArrayList<>();
     }
-/* 
-    private void cargarUsuariosDesdeArchivo(String rutaArchivo) {
-        String contenido = LeerArchivo.leerDesdeArchivo(rutaArchivo);
-        String[] usuariosArray = contenido.split("\\|");
-        for (String usuario : usuariosArray) {
-            String[] dato = usuario.split(",");
-            if (dato.length >= 6) {
-                String nombre = dato[0].trim();
-                String apellido = dato[1].trim();
-                String correo = dato[2].trim();
-                TipoUsuario tipoUsuario;
-                try {
-                    tipoUsuario = TipoUsuario.valueOf(dato[5].trim());
-                } catch (IllegalArgumentException e) {
-                    System.err.println("Tipo de usuario inválido: " + dato[5]);
-                    continue;
-                }
-                String usuarioUser = "";
-                String usuarioContraseña = "";
 
-                if (dato.length >= 6 && tipoUsuario != TipoUsuario.AUTOR) {
-                    usuarioUser = dato[3].trim();
-                    usuarioContraseña = dato[4].trim();
-                }
-
-                switch (tipoUsuario) {
-                    case EDITOR:
-                        usuarios.add(new Editor(nombre, apellido, correo, usuarioUser, usuarioContraseña));
-                        break;
-                    case REVISOR:
-                        int experiencia = Integer.parseInt(dato[4].trim());
-                        usuarios.add(new Revisor(nombre, apellido, correo, experiencia, usuarioUser, usuarioContraseña));
-                        break;
-                    default:
-                        System.err.println("Tipo de usuario no soportado: " + tipoUsuario);
-                        break;
-                }
-            } else {
-                System.err.println("Datos incompletos para el usuario: " + usuario);
-            }
-        }
-    }
-*/
 
     // Método para validar el usuario
     public Usuario validarUsuario(String user, String contraseña) {
@@ -78,12 +36,12 @@ public class Editorial {
         System.out.println("\nArtículo sometido con éxito por " + autor.getNombre() + " " + autor.getApellido());
 
         //se guarda los articulos en un archivo txt "articulosDeEditorial"
-        String ruta = "C:\\Users\\USER\\Downloads\\POO\\PROYECTO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\ArticulosDeEditorial.txt";
+        String ruta = "C:\\Users\\PeterRafa\\OneDrive - Universidad de Guayaquil\\Documentos\\PROYECTO_COLABORATIVO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\ArticulosDeEditorial.txt";
         String datosArticulo = articulo.getTitulo()+","+articulo.getResumen()+","+autor.getNombre()+","+autor.getApellido()+","+autor.getCorreo()+","+articulo.getCodigo()+"|";
         EscribirArchivo.escribirEnArchivo(ruta, datosArticulo); 
 
         //Enviando el correo a los revisores
-        //enviarCorreoARevisores(articulo, rev1, rev2);
+        enviarCorreoARevisores(articulo, rev1, rev2);
     }
 
     void enviarCorreoARevisores(Articulo articulo, Revisor rev1, Revisor rev2) {
@@ -111,6 +69,3 @@ public class Editorial {
         return usuarios;
     }
 }
-
-
-

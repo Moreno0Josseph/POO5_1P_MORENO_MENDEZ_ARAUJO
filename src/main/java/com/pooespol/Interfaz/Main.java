@@ -47,18 +47,7 @@ public class Main {
         }
     
     }
-
-/* 
-    private static void escribirComentariosEnArchivo(String nombreArchivo, Revisor rev1, Revisor rev2) {
-        // Implementa la lógica para escribir los comentarios en un archivo si es necesario
-        // Puedes usar FileWriter u otra clase adecuada para escribir en archivos
-        // Ejemplo básico:
-        // FileWriter writer = new FileWriter(nombreArchivo);
-        // writer.write(rev1.getComentario() + "\n");
-        // writer.write(rev2.getComentario() + "\n");
-        // writer.close();
-*/
-    
+  
 
     private static Revisor crearRevisor(String datos) {
         String[] campos = datos.split(",");

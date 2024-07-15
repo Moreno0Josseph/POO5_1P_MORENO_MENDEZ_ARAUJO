@@ -6,7 +6,17 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 
+/**
+ * La clase EnviarCorreo proporciona métodos para enviar correos electrónicos utilizando
+ * las propiedades configuradas en un archivo de configuración.
+ */
 public class EnviarCorreo {
+
+    /**
+     * Carga las propiedades del archivo de configuración.
+     *
+     * @return Un objeto Properties con las propiedades cargadas o null si ocurre un error.
+     */
     private static Properties cargarPropiedades() {
         Properties prop = new Properties();
         try (InputStream input = EnviarCorreo.class.getClassLoader().getResourceAsStream("config.properties")) {
@@ -22,6 +32,13 @@ public class EnviarCorreo {
         return prop;
     }
 
+    /**
+     * Envía un correo electrónico al destinatario especificado con el asunto y contenido dados.
+     *
+     * @param destinatario La dirección de correo electrónico del destinatario.
+     * @param asunto       El asunto del correo electrónico.
+     * @param contenido    El contenido del correo electrónico.
+     */
     public static void enviarCorreo(String destinatario, String asunto, String contenido) {
         Properties prop = cargarPropiedades();
         if (prop == null) return;
@@ -66,7 +83,3 @@ public class EnviarCorreo {
         }
     }
 }
-
-
-
-

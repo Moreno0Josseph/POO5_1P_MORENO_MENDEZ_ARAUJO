@@ -1,1 +1,1 @@
-Est� feo,ABC123,belenm|Est� okey,ABC123,luisp|
+mal,ABC123,belenm|bien,ABC123,luisp|
