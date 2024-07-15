@@ -35,8 +35,16 @@ public class Autor {
         return departamento;
     }
 
-    public String generarCorreo() {
+    public String generarCorreoSubidaArticulo() {
         return "Estimado " + getNombre() + ",\n\nGracias por someter su artículo.\n\nSaludos,\nEditorial";
+    }
+
+    public String generarCorreoArticuloAceptado(){
+        return "Estimado " + getNombre() + ",\n\nSu articulo ha sido aceptado.\n\nSaludos,\nEditorial";
+    }
+
+    public String generarCorreoArticuloRechazadp(){
+        return "Estimado " + getNombre() + ",\n\nSu articulo ha sido rechazado.\n\nSaludos,\nEditorial";
     }
 
     @Override

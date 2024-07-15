@@ -12,9 +12,8 @@ public class Editorial {
     public Editorial() {
         usuarios = new ArrayList<>();
         articulos = new ArrayList<>();
-        cargarUsuariosDesdeArchivo("C:\\Users\\PeterRafa\\OneDrive - Universidad de Guayaquil\\Documentos\\PROYECTO_COLABORATIVO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\Usuarios.txt");
     }
-
+/* 
     private void cargarUsuariosDesdeArchivo(String rutaArchivo) {
         String contenido = LeerArchivo.leerDesdeArchivo(rutaArchivo);
         String[] usuariosArray = contenido.split("\\|");
@@ -56,6 +55,7 @@ public class Editorial {
             }
         }
     }
+*/
 
     // Método para validar el usuario
     public Usuario validarUsuario(String user, String contraseña) {
@@ -69,12 +69,21 @@ public class Editorial {
         return null; // Usuario no encontrado o contraseña incorrecta
     }
 
+
     // Método para someter un artículo
     public void someterArticulo(Articulo articulo, Autor autor, Revisor rev1, Revisor rev2) {
         articulo.setAutor(autor);
         articulos.add(articulo);
-        enviarCorreoARevisores(articulo, rev1, rev2);
-        System.out.println("Artículo sometido con éxito por " + autor.getNombre() + " " + autor.getApellido());
+        //enviarCorreoARevisores(articulo, rev1, rev2);
+        System.out.println("\nArtículo sometido con éxito por " + autor.getNombre() + " " + autor.getApellido());
+
+        //se guarda los articulos en un archivo txt "articulosDeEditorial"
+        String ruta = "C:\\Users\\USER\\Downloads\\POO\\PROYECTO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\ArticulosDeEditorial.txt";
+        String datosArticulo = articulo.getTitulo()+","+articulo.getResumen()+","+autor.getNombre()+","+autor.getApellido()+","+autor.getCorreo()+","+articulo.getCodigo()+"|";
+        EscribirArchivo.escribirEnArchivo(ruta, datosArticulo); 
+
+        //Enviando el correo a los revisores
+        //enviarCorreoARevisores(articulo, rev1, rev2);
     }
 
     void enviarCorreoARevisores(Articulo articulo, Revisor rev1, Revisor rev2) {

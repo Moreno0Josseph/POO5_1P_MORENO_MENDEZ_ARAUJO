@@ -1,7 +1,7 @@
 package com.pooespol.Usuarios;
 import java.util.Scanner;
+import com.pooespol.Interfaz.*;
 
-import com.pooespol.Interfaz.EscribirArchivo;
 public class Revisor extends Usuario {
     private int experiencia;
 
@@ -15,26 +15,38 @@ public class Revisor extends Usuario {
     }
 
     @Override
-    public String generarCorreo() {
-        return "Estimado Revisor " + getNombre() + ",Se le ha asignado un nuevo artículo para revisar.\n\nSaludos,\nEditorial.";
+    public String generarCorreo(Articulo art) {
+        return "Estimado Revisor " + getNombre() + ", se le ha asignado un nuevo artículo para revisar.\n"+ art.toString()+"\n\n"+"Saludos,\nEditorial.";
     }
 
-    @Override
-    public int decidirSobreArticulo() {
-        // Implementar la lógica para que el revisor proporcione comentarios y una decisión
-        Scanner entrada = new Scanner(System.in);
-        
+    public String comentarSobreArticulo(Scanner entrada){
+        // Implementar la lógica para que el revisor proporcione comentarios
+        System.out.print("Ingrese sus comentarios sobre el articulo: ");
+        String comentario = entrada.nextLine();
 
-        System.out.println("Proporcionando comentarios y decisión sobre el artículo...");
-        System.out.print("Ingrese 1 para aceptar el artículo o 0 para rechazarlo:  ");;
-        int decision = entrada.nextInt();
-        if(decision == 1){                                  //Está aceptando el articulo
-            System.out.println("El artículo ha sido aceptado!");
+        return comentario;
+    }
+
+
+    @Override
+    public int decidirSobreArticulo(Scanner entrada) {
+        
+        //El revisor da su decisión final sobre la aceptación del articulo
+        System.out.print("\nIngrese 1 para aceptar el artículo o 0 para rechazarlo:  ");
+        int decision = 0;
+        if(entrada.hasNextInt()){
+            decision += entrada.nextInt();
             
-            
-        }else if (decision ==0){                            //Está rechazando el articulo
-            System.out.println("El artículo ha sido rechazado.");
-            
+            if(decision == 1){                                  //Está aceptando el articulo
+                System.out.println("\nEl artículo ha sido aceptado!\n");
+                
+                
+            }else if (decision == 0){                            //Está rechazando el articulo
+                System.out.println("\nEl artículo ha sido rechazado.\n");
+                
+            }
+        }else{
+            System.out.println("\nFormato invalido de dato\n");
         }
         return decision;
     }
@@ -42,13 +54,14 @@ public class Revisor extends Usuario {
     @Override
     public String toString() {
         return super.toString() +
-                ", experiencia=" + experiencia +
-                '}';
+                "Experiencia=" + experiencia + "\n";
     }
-    public  String GenerarComentario(String comentario){
-        String rutaComentarios= "C:\\Users\\PeterRafa\\OneDrive - Universidad de Guayaquil\\Documentos\\PROYECTO_COLABORATIVO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\Datosrevision.txt";
-        EscribirArchivo.escribirEnArchivo(rutaComentarios, comentario);
-        return comentario;
+
+    
+    public void guardarComentario(String comentario,Articulo articulo){
+        String rutaComentarios= "C:\\Users\\USER\\Downloads\\POO\\PROYECTO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\POO5_1P_MORENO_MENDEZ_ARAUJO\\Comentarios.txt";
+        String contenido = articulo.getTitulo()+","+articulo.getAutor().getNombre()+","+articulo.getAutor().getApellido()+","+articulo.getCodigo()+","+comentario+"|";
+        EscribirArchivo.escribirEnArchivo(rutaComentarios, contenido);
     }
 }
 

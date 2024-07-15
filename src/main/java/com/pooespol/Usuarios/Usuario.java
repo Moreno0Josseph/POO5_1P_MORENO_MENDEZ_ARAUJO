@@ -1,4 +1,7 @@
 package com.pooespol.Usuarios;
+import java.util.Scanner;
+
+import com.pooespol.Interfaz.*;
 
 public abstract class Usuario {
     private String nombre;
@@ -35,17 +38,15 @@ public abstract class Usuario {
         return contraseña;
     }
 
-    public abstract String generarCorreo();
+    public abstract String generarCorreo(Articulo art);
 
-    public abstract int decidirSobreArticulo();
+    public abstract int decidirSobreArticulo(Scanner entrada);
     
     @Override
     public String toString() {
-        return "Usuario{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", correo='" + correo + '\'' +
-                ", user='" + user + '\'' +
-                '}';
+        return "Usuario, con Nombre = " + nombre + '\n' +
+                "Apellido = " + apellido + '\n' +
+                "Correo = " + correo + '\n' +
+                "User = " + user + '\n';
     }
 }
