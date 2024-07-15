@@ -116,7 +116,32 @@ public class Archivo {
 
         String[] elementosDos = campos[1].split(",");
         respuestaDos = elementosDos[0];
+//----------------------------------------------------------------------------------------------
+        String comentarios = null;
+        //BufferedReader lectura = new BufferedReader(lector);
+        try (BufferedReader lectura = new BufferedReader(new FileReader("ComentariosDeArticulo.txt"))) {
+            String linea;
+            StringBuilder contenidoRespuestas = new StringBuilder();
+            while ((linea = lectura.readLine()) != null) {
+                String[] respuestasDatos = linea.split("|");
+                for (String dato: respuestasDatos){
+                    contenidoRespuestas.append(dato);
+                }
+            }
+            comentarios = contenidoRespuestas.toString().trim();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        String comentarioUno = null;
+        String comentarioDos = null;
+
+        String[] campos2 = comentarios.split("\\|"); 
+        String[] elementosComentarioUno = campos2[0].split(",");
+        comentarioUno = elementosComentarioUno[0];
+
+        String[] elementosComentarioDos = campos2[1].split(",");
+        comentarioDos = elementosComentarioDos[0];
 
 
         //.----------------------------------
@@ -132,8 +157,8 @@ public class Archivo {
                 System.out.println();
 
                 //proceso de enviar correo
-                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido rechazado"+ "\n\n" +
-                "Saludos,\nEditorial";
+                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo.\n "+articulo.toString()+" ha sido rechazado"+ "\n\n" +"Los comentarios de los revisores son: \n"+
+                "Revisor 1: "+comentarioUno+"\n"+"Revisor 2: "+comentarioDos+"\n"+"Saludos,\nEditorial";
                 EnviarCorreo.enviarCorreo(articulo.getAutor().getCorreo(), asunto, mensajeParaCorreo);
                 System.out.println("Se acaba de enviar el correo al autor del articulo.");
 
@@ -143,8 +168,8 @@ public class Archivo {
                 System.out.println();
 
                 //proceso de enviar correo
-                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido aceptado. ¡Felicidades!"+ "\n\n" +
-                "Saludos,\nEditorial";
+                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido aceptado. ¡Felicidades!"+ "\n\n"+"Los comentarios de los revisores son: \n"+
+                "Revisor 1: "+comentarioUno+"\n"+"Revisor 2: "+comentarioDos+"\n"+"Saludos,\nEditorial";
                 EnviarCorreo.enviarCorreo(articulo.getAutor().getCorreo(), asunto, mensajeParaCorreo);
                 System.out.println("Se acaba de enviar el correo al autor del articulo.");
             }else{
@@ -163,8 +188,10 @@ public class Archivo {
                 System.out.println();
 
                 //proceso de enviar correo
-                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido aceptado. ¡Felicidades!"+ "\n\n" +
-                "Saludos,\nEditorial";
+                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido aceptado. ¡Felicidades!"+ "\n\n"+"Los comentarios de los revisores son: \n"+
+                "Revisor 1: "+comentarioUno+"\n"+"Revisor 2: "+comentarioDos+"\n"+"Saludos,\nEditorial";
+
+
                 EnviarCorreo.enviarCorreo(articulo.getAutor().getCorreo(), asunto, mensajeParaCorreo);
                 System.out.println("Se acaba de enviar el correo al autor del articulo.");
             }else if(decision==0){
@@ -172,8 +199,9 @@ public class Archivo {
                 System.out.println();
 
                 //proceso de enviar correo
-                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo "+articulo.toString()+" ha sido rechazado."+ "\n\n" +
-                "Saludos,\nEditorial";
+                String mensajeParaCorreo = "Estimado "+articulo.getAutor().getApellido()+" "+articulo.getAutor().getNombre()+" le informamos que su articulo.\n "+articulo.toString()+" ha sido rechazado"+ "\n\n" +"Los comentarios de los revisores son: \n"+
+                "Revisor 1: "+comentarioUno+"\n"+"Revisor 2: "+comentarioDos+"\n"+"Saludos,\nEditorial";
+
                 EnviarCorreo.enviarCorreo(articulo.getAutor().getCorreo(), asunto, mensajeParaCorreo);
                 System.out.println("Se acaba de enviar el correo al autor del articulo.");
             }
